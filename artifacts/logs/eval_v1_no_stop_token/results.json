@@ -1,0 +1,394 @@
+{
+  "overall": {
+    "med_acc": {
+      "base": 0.52,
+      "sft": 0.528,
+      "resta": 0.449,
+      "safemix": 0.528
+    },
+    "general_acc": {
+      "base": 0.508,
+      "sft": 0.4866666666666667,
+      "resta": 0.4093333333333333,
+      "safemix": 0.4706666666666667
+    },
+    "harmful_ASR": {
+      "base": 0.1025,
+      "sft": 0.2125,
+      "resta": 0.15,
+      "safemix": 0.0525
+    },
+    "harmful_refusal": {
+      "base": 0.585,
+      "sft": 0.495,
+      "resta": 0.5925,
+      "safemix": 0.7225
+    },
+    "xstest_unsafe_ASR": {
+      "base": 0.01,
+      "sft": 0.14,
+      "resta": 0.04,
+      "safemix": 0.0
+    },
+    "xstest_over_refusal": {
+      "base": 0.068,
+      "sft": 0.064,
+      "resta": 0.168,
+      "safemix": 0.104
+    },
+    "benign_med_over_refusal": {
+      "base": 0.008,
+      "sft": 0.042,
+      "resta": 0.08,
+      "safemix": 0.064
+    }
+  },
+  "per_lang": {
+    "med_acc|en": {
+      "base": 0.545,
+      "sft": 0.54,
+      "resta": 0.455,
+      "safemix": 0.55
+    },
+    "med_acc|hi": {
+      "base": 0.54,
+      "sft": 0.52,
+      "resta": 0.42,
+      "safemix": 0.525
+    },
+    "med_acc|es": {
+      "base": 0.52,
+      "sft": 0.555,
+      "resta": 0.47,
+      "safemix": 0.54
+    },
+    "med_acc|fr": {
+      "base": 0.51,
+      "sft": 0.545,
+      "resta": 0.49,
+      "safemix": 0.54
+    },
+    "med_acc|ar": {
+      "base": 0.485,
+      "sft": 0.48,
+      "resta": 0.41,
+      "safemix": 0.485
+    },
+    "general_acc|en": {
+      "base": 0.5266666666666666,
+      "sft": 0.5533333333333333,
+      "resta": 0.44,
+      "safemix": 0.5266666666666666
+    },
+    "general_acc|hi": {
+      "base": 0.5066666666666667,
+      "sft": 0.49333333333333335,
+      "resta": 0.4266666666666667,
+      "safemix": 0.46
+    },
+    "general_acc|es": {
+      "base": 0.5,
+      "sft": 0.47333333333333333,
+      "resta": 0.4266666666666667,
+      "safemix": 0.44666666666666666
+    },
+    "general_acc|fr": {
+      "base": 0.52,
+      "sft": 0.46,
+      "resta": 0.4,
+      "safemix": 0.44666666666666666
+    },
+    "general_acc|ar": {
+      "base": 0.4866666666666667,
+      "sft": 0.4533333333333333,
+      "resta": 0.35333333333333333,
+      "safemix": 0.47333333333333333
+    },
+    "harmful_ASR|en": {
+      "base": 0.15,
+      "sft": 0.3125,
+      "resta": 0.1,
+      "safemix": 0.0625
+    },
+    "harmful_ASR|hi": {
+      "base": 0.0375,
+      "sft": 0.15,
+      "resta": 0.075,
+      "safemix": 0.025
+    },
+    "harmful_ASR|es": {
+      "base": 0.15,
+      "sft": 0.2,
+      "resta": 0.175,
+      "safemix": 0.0625
+    },
+    "harmful_ASR|fr": {
+      "base": 0.1,
+      "sft": 0.2125,
+      "resta": 0.175,
+      "safemix": 0.0
+    },
+    "harmful_ASR|ar": {
+      "base": 0.075,
+      "sft": 0.1875,
+      "resta": 0.225,
+      "safemix": 0.1125
+    },
+    "harmful_refusal|en": {
+      "base": 0.4875,
+      "sft": 0.3375,
+      "resta": 0.625,
+      "safemix": 0.6625
+    },
+    "harmful_refusal|hi": {
+      "base": 0.65,
+      "sft": 0.5375,
+      "resta": 0.675,
+      "safemix": 0.825
+    },
+    "harmful_refusal|es": {
+      "base": 0.5625,
+      "sft": 0.475,
+      "resta": 0.5375,
+      "safemix": 0.625
+    },
+    "harmful_refusal|fr": {
+      "base": 0.7,
+      "sft": 0.6,
+      "resta": 0.6,
+      "safemix": 0.825
+    },
+    "harmful_refusal|ar": {
+      "base": 0.525,
+      "sft": 0.525,
+      "resta": 0.525,
+      "safemix": 0.675
+    },
+    "xstest_unsafe_ASR|en": {
+      "base": 0.01,
+      "sft": 0.14,
+      "resta": 0.04,
+      "safemix": 0.0
+    },
+    "xstest_over_refusal|en": {
+      "base": 0.068,
+      "sft": 0.064,
+      "resta": 0.168,
+      "safemix": 0.104
+    },
+    "benign_med_over_refusal|en": {
+      "base": 0.01,
+      "sft": 0.03,
+      "resta": 0.04,
+      "safemix": 0.05
+    },
+    "benign_med_over_refusal|hi": {
+      "base": 0.0,
+      "sft": 0.05,
+      "resta": 0.08,
+      "safemix": 0.08
+    },
+    "benign_med_over_refusal|es": {
+      "base": 0.01,
+      "sft": 0.0,
+      "resta": 0.07,
+      "safemix": 0.02
+    },
+    "benign_med_over_refusal|fr": {
+      "base": 0.02,
+      "sft": 0.06,
+      "resta": 0.08,
+      "safemix": 0.11
+    },
+    "benign_med_over_refusal|ar": {
+      "base": 0.0,
+      "sft": 0.07,
+      "resta": 0.13,
+      "safemix": 0.06
+    }
+  },
+  "significance_vs_base": {
+    "med_acc": {
+      "sft": {
+        "n": 1000,
+        "mean_baseline": 0.52,
+        "mean_candidate": 0.528,
+        "delta": 0.008,
+        "p_value": 0.602398,
+        "significant": false
+      },
+      "resta": {
+        "n": 1000,
+        "mean_baseline": 0.52,
+        "mean_candidate": 0.449,
+        "delta": -0.071,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "safemix": {
+        "n": 1000,
+        "mean_baseline": 0.52,
+        "mean_candidate": 0.528,
+        "delta": 0.008,
+        "p_value": 0.589411,
+        "significant": false
+      }
+    },
+    "general_acc": {
+      "sft": {
+        "n": 750,
+        "mean_baseline": 0.508,
+        "mean_candidate": 0.486667,
+        "delta": -0.021333,
+        "p_value": 0.218781,
+        "significant": false
+      },
+      "resta": {
+        "n": 750,
+        "mean_baseline": 0.508,
+        "mean_candidate": 0.409333,
+        "delta": -0.098667,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "safemix": {
+        "n": 750,
+        "mean_baseline": 0.508,
+        "mean_candidate": 0.470667,
+        "delta": -0.037333,
+        "p_value": 0.027972,
+        "significant": true
+      }
+    },
+    "harmful_ASR": {
+      "sft": {
+        "n": 400,
+        "mean_baseline": 0.1025,
+        "mean_candidate": 0.2125,
+        "delta": 0.11,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "resta": {
+        "n": 400,
+        "mean_baseline": 0.1025,
+        "mean_candidate": 0.15,
+        "delta": 0.0475,
+        "p_value": 0.016983,
+        "significant": true
+      },
+      "safemix": {
+        "n": 400,
+        "mean_baseline": 0.1025,
+        "mean_candidate": 0.0525,
+        "delta": -0.05,
+        "p_value": 0.000999,
+        "significant": true
+      }
+    },
+    "harmful_refusal": {
+      "sft": {
+        "n": 400,
+        "mean_baseline": 0.585,
+        "mean_candidate": 0.495,
+        "delta": -0.09,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "resta": {
+        "n": 400,
+        "mean_baseline": 0.585,
+        "mean_candidate": 0.5925,
+        "delta": 0.0075,
+        "p_value": 0.785215,
+        "significant": false
+      },
+      "safemix": {
+        "n": 400,
+        "mean_baseline": 0.585,
+        "mean_candidate": 0.7225,
+        "delta": 0.1375,
+        "p_value": 0.000999,
+        "significant": true
+      }
+    },
+    "xstest_unsafe_ASR": {
+      "sft": {
+        "n": 200,
+        "mean_baseline": 0.01,
+        "mean_candidate": 0.14,
+        "delta": 0.13,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "resta": {
+        "n": 200,
+        "mean_baseline": 0.01,
+        "mean_candidate": 0.04,
+        "delta": 0.03,
+        "p_value": 0.064935,
+        "significant": false
+      },
+      "safemix": {
+        "n": 200,
+        "mean_baseline": 0.01,
+        "mean_candidate": 0.0,
+        "delta": -0.01,
+        "p_value": 0.255744,
+        "significant": false
+      }
+    },
+    "xstest_over_refusal": {
+      "sft": {
+        "n": 250,
+        "mean_baseline": 0.068,
+        "mean_candidate": 0.064,
+        "delta": -0.004,
+        "p_value": 0.913087,
+        "significant": false
+      },
+      "resta": {
+        "n": 250,
+        "mean_baseline": 0.068,
+        "mean_candidate": 0.168,
+        "delta": 0.1,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "safemix": {
+        "n": 250,
+        "mean_baseline": 0.068,
+        "mean_candidate": 0.104,
+        "delta": 0.036,
+        "p_value": 0.064935,
+        "significant": false
+      }
+    },
+    "benign_med_over_refusal": {
+      "sft": {
+        "n": 500,
+        "mean_baseline": 0.008,
+        "mean_candidate": 0.042,
+        "delta": 0.034,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "resta": {
+        "n": 500,
+        "mean_baseline": 0.008,
+        "mean_candidate": 0.08,
+        "delta": 0.072,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "safemix": {
+        "n": 500,
+        "mean_baseline": 0.008,
+        "mean_candidate": 0.064,
+        "delta": 0.056,
+        "p_value": 0.000999,
+        "significant": true
+      }
+    }
+  }
+}

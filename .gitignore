@@ -1,0 +1,15 @@
+# environments / caches
+.venv/
+__pycache__/
+runs/
+# third-party kits are cloned at pinned commits (see README "Reproduce")
+third_party/
+# raw + staged data, models, HF staging: large, published on Hugging Face instead
+data/
+artifacts/models/
+artifacts/hf/
+artifacts/datasets/
+artifacts/logs/eval/
+artifacts/logs/eval_v1_no_stop_token/*/
+artifacts/logs/judge_check/*.csv
+*.log

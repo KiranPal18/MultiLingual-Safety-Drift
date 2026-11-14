@@ -1,0 +1,608 @@
+{
+  "overall": {
+    "med_acc": {
+      "base": 0.52,
+      "sft": 0.528,
+      "resta": 0.449,
+      "resta_a0.1": 0.524,
+      "safemix": 0.528
+    },
+    "general_acc": {
+      "base": 0.508,
+      "sft": 0.4866666666666667,
+      "resta": 0.4093333333333333,
+      "resta_a0.1": 0.4866666666666667,
+      "safemix": 0.4706666666666667
+    },
+    "harmful_ASR": {
+      "base": 0.105,
+      "sft": 0.185,
+      "resta": 0.1325,
+      "resta_a0.1": 0.1775,
+      "safemix": 0.04
+    },
+    "harmful_refusal": {
+      "base": 0.585,
+      "sft": 0.4575,
+      "resta": 0.58,
+      "resta_a0.1": 0.4875,
+      "safemix": 0.715
+    },
+    "xstest_unsafe_ASR": {
+      "base": 0.01,
+      "sft": 0.1,
+      "resta": 0.035,
+      "resta_a0.1": 0.055,
+      "safemix": 0.0
+    },
+    "xstest_over_refusal": {
+      "base": 0.068,
+      "sft": 0.06,
+      "resta": 0.176,
+      "resta_a0.1": 0.06,
+      "safemix": 0.096
+    },
+    "harmful_ASR_llamaguard": {
+      "base": 0.1475,
+      "sft": 0.1275,
+      "resta": 0.1225,
+      "resta_a0.1": 0.125,
+      "safemix": 0.045
+    },
+    "xstest_unsafe_ASR_llamaguard": {
+      "base": 0.055,
+      "sft": 0.095,
+      "resta": 0.035,
+      "resta_a0.1": 0.04,
+      "safemix": 0.03
+    },
+    "benign_med_over_refusal": {
+      "base": 0.008,
+      "sft": 0.032,
+      "resta": 0.062,
+      "resta_a0.1": 0.028,
+      "safemix": 0.036
+    }
+  },
+  "per_lang": {
+    "med_acc|en": {
+      "base": 0.545,
+      "sft": 0.54,
+      "resta": 0.455,
+      "resta_a0.1": 0.555,
+      "safemix": 0.55
+    },
+    "med_acc|hi": {
+      "base": 0.54,
+      "sft": 0.52,
+      "resta": 0.42,
+      "resta_a0.1": 0.515,
+      "safemix": 0.525
+    },
+    "med_acc|es": {
+      "base": 0.52,
+      "sft": 0.555,
+      "resta": 0.47,
+      "resta_a0.1": 0.57,
+      "safemix": 0.54
+    },
+    "med_acc|fr": {
+      "base": 0.51,
+      "sft": 0.545,
+      "resta": 0.49,
+      "resta_a0.1": 0.53,
+      "safemix": 0.54
+    },
+    "med_acc|ar": {
+      "base": 0.485,
+      "sft": 0.48,
+      "resta": 0.41,
+      "resta_a0.1": 0.45,
+      "safemix": 0.485
+    },
+    "general_acc|en": {
+      "base": 0.5266666666666666,
+      "sft": 0.5533333333333333,
+      "resta": 0.44,
+      "resta_a0.1": 0.5266666666666666,
+      "safemix": 0.5266666666666666
+    },
+    "general_acc|hi": {
+      "base": 0.5066666666666667,
+      "sft": 0.49333333333333335,
+      "resta": 0.4266666666666667,
+      "resta_a0.1": 0.5133333333333333,
+      "safemix": 0.46
+    },
+    "general_acc|es": {
+      "base": 0.5,
+      "sft": 0.47333333333333333,
+      "resta": 0.4266666666666667,
+      "resta_a0.1": 0.47333333333333333,
+      "safemix": 0.44666666666666666
+    },
+    "general_acc|fr": {
+      "base": 0.52,
+      "sft": 0.46,
+      "resta": 0.4,
+      "resta_a0.1": 0.48,
+      "safemix": 0.44666666666666666
+    },
+    "general_acc|ar": {
+      "base": 0.4866666666666667,
+      "sft": 0.4533333333333333,
+      "resta": 0.35333333333333333,
+      "resta_a0.1": 0.44,
+      "safemix": 0.47333333333333333
+    },
+    "harmful_ASR|en": {
+      "base": 0.15,
+      "sft": 0.275,
+      "resta": 0.0875,
+      "resta_a0.1": 0.225,
+      "safemix": 0.0375
+    },
+    "harmful_ASR|hi": {
+      "base": 0.0375,
+      "sft": 0.1625,
+      "resta": 0.0875,
+      "resta_a0.1": 0.15,
+      "safemix": 0.025
+    },
+    "harmful_ASR|es": {
+      "base": 0.1625,
+      "sft": 0.2,
+      "resta": 0.15,
+      "resta_a0.1": 0.2,
+      "safemix": 0.075
+    },
+    "harmful_ASR|fr": {
+      "base": 0.1,
+      "sft": 0.1125,
+      "resta": 0.175,
+      "resta_a0.1": 0.125,
+      "safemix": 0.0
+    },
+    "harmful_ASR|ar": {
+      "base": 0.075,
+      "sft": 0.175,
+      "resta": 0.1625,
+      "resta_a0.1": 0.1875,
+      "safemix": 0.0625
+    },
+    "harmful_refusal|en": {
+      "base": 0.4875,
+      "sft": 0.325,
+      "resta": 0.6,
+      "resta_a0.1": 0.4125,
+      "safemix": 0.675
+    },
+    "harmful_refusal|hi": {
+      "base": 0.65,
+      "sft": 0.475,
+      "resta": 0.6625,
+      "resta_a0.1": 0.575,
+      "safemix": 0.825
+    },
+    "harmful_refusal|es": {
+      "base": 0.5625,
+      "sft": 0.45,
+      "resta": 0.5625,
+      "resta_a0.1": 0.475,
+      "safemix": 0.6
+    },
+    "harmful_refusal|fr": {
+      "base": 0.7,
+      "sft": 0.625,
+      "resta": 0.5875,
+      "resta_a0.1": 0.5625,
+      "safemix": 0.8
+    },
+    "harmful_refusal|ar": {
+      "base": 0.525,
+      "sft": 0.4125,
+      "resta": 0.4875,
+      "resta_a0.1": 0.4125,
+      "safemix": 0.675
+    },
+    "xstest_unsafe_ASR|en": {
+      "base": 0.01,
+      "sft": 0.1,
+      "resta": 0.035,
+      "resta_a0.1": 0.055,
+      "safemix": 0.0
+    },
+    "xstest_over_refusal|en": {
+      "base": 0.068,
+      "sft": 0.06,
+      "resta": 0.176,
+      "resta_a0.1": 0.06,
+      "safemix": 0.096
+    },
+    "harmful_ASR_llamaguard|en": {
+      "base": 0.2875,
+      "sft": 0.225,
+      "resta": 0.1375,
+      "resta_a0.1": 0.2,
+      "safemix": 0.0875
+    },
+    "harmful_ASR_llamaguard|hi": {
+      "base": 0.0125,
+      "sft": 0.0625,
+      "resta": 0.0875,
+      "resta_a0.1": 0.025,
+      "safemix": 0.0
+    },
+    "harmful_ASR_llamaguard|es": {
+      "base": 0.1625,
+      "sft": 0.1125,
+      "resta": 0.075,
+      "resta_a0.1": 0.075,
+      "safemix": 0.0875
+    },
+    "harmful_ASR_llamaguard|fr": {
+      "base": 0.15,
+      "sft": 0.1,
+      "resta": 0.1375,
+      "resta_a0.1": 0.15,
+      "safemix": 0.025
+    },
+    "harmful_ASR_llamaguard|ar": {
+      "base": 0.125,
+      "sft": 0.1375,
+      "resta": 0.175,
+      "resta_a0.1": 0.175,
+      "safemix": 0.025
+    },
+    "xstest_unsafe_ASR_llamaguard|en": {
+      "base": 0.055,
+      "sft": 0.095,
+      "resta": 0.035,
+      "resta_a0.1": 0.04,
+      "safemix": 0.03
+    },
+    "benign_med_over_refusal|en": {
+      "base": 0.01,
+      "sft": 0.02,
+      "resta": 0.05,
+      "resta_a0.1": 0.01,
+      "safemix": 0.01
+    },
+    "benign_med_over_refusal|hi": {
+      "base": 0.0,
+      "sft": 0.05,
+      "resta": 0.04,
+      "resta_a0.1": 0.06,
+      "safemix": 0.06
+    },
+    "benign_med_over_refusal|es": {
+      "base": 0.01,
+      "sft": 0.01,
+      "resta": 0.05,
+      "resta_a0.1": 0.02,
+      "safemix": 0.02
+    },
+    "benign_med_over_refusal|fr": {
+      "base": 0.02,
+      "sft": 0.05,
+      "resta": 0.1,
+      "resta_a0.1": 0.03,
+      "safemix": 0.08
+    },
+    "benign_med_over_refusal|ar": {
+      "base": 0.0,
+      "sft": 0.03,
+      "resta": 0.07,
+      "resta_a0.1": 0.02,
+      "safemix": 0.01
+    }
+  },
+  "significance_vs_base": {
+    "med_acc": {
+      "sft": {
+        "n": 1000,
+        "mean_baseline": 0.52,
+        "mean_candidate": 0.528,
+        "delta": 0.008,
+        "p_value": 0.602398,
+        "significant": false
+      },
+      "resta": {
+        "n": 1000,
+        "mean_baseline": 0.52,
+        "mean_candidate": 0.449,
+        "delta": -0.071,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "resta_a0.1": {
+        "n": 1000,
+        "mean_baseline": 0.52,
+        "mean_candidate": 0.524,
+        "delta": 0.004,
+        "p_value": 0.81019,
+        "significant": false
+      },
+      "safemix": {
+        "n": 1000,
+        "mean_baseline": 0.52,
+        "mean_candidate": 0.528,
+        "delta": 0.008,
+        "p_value": 0.589411,
+        "significant": false
+      }
+    },
+    "general_acc": {
+      "sft": {
+        "n": 750,
+        "mean_baseline": 0.508,
+        "mean_candidate": 0.486667,
+        "delta": -0.021333,
+        "p_value": 0.218781,
+        "significant": false
+      },
+      "resta": {
+        "n": 750,
+        "mean_baseline": 0.508,
+        "mean_candidate": 0.409333,
+        "delta": -0.098667,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "resta_a0.1": {
+        "n": 750,
+        "mean_baseline": 0.508,
+        "mean_candidate": 0.486667,
+        "delta": -0.021333,
+        "p_value": 0.22977,
+        "significant": false
+      },
+      "safemix": {
+        "n": 750,
+        "mean_baseline": 0.508,
+        "mean_candidate": 0.470667,
+        "delta": -0.037333,
+        "p_value": 0.027972,
+        "significant": true
+      }
+    },
+    "harmful_ASR": {
+      "sft": {
+        "n": 400,
+        "mean_baseline": 0.105,
+        "mean_candidate": 0.185,
+        "delta": 0.08,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "resta": {
+        "n": 400,
+        "mean_baseline": 0.105,
+        "mean_candidate": 0.1325,
+        "delta": 0.0275,
+        "p_value": 0.182817,
+        "significant": false
+      },
+      "resta_a0.1": {
+        "n": 400,
+        "mean_baseline": 0.105,
+        "mean_candidate": 0.1775,
+        "delta": 0.0725,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "safemix": {
+        "n": 400,
+        "mean_baseline": 0.105,
+        "mean_candidate": 0.04,
+        "delta": -0.065,
+        "p_value": 0.000999,
+        "significant": true
+      }
+    },
+    "harmful_refusal": {
+      "sft": {
+        "n": 400,
+        "mean_baseline": 0.585,
+        "mean_candidate": 0.4575,
+        "delta": -0.1275,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "resta": {
+        "n": 400,
+        "mean_baseline": 0.585,
+        "mean_candidate": 0.58,
+        "delta": -0.005,
+        "p_value": 0.862138,
+        "significant": false
+      },
+      "resta_a0.1": {
+        "n": 400,
+        "mean_baseline": 0.585,
+        "mean_candidate": 0.4875,
+        "delta": -0.0975,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "safemix": {
+        "n": 400,
+        "mean_baseline": 0.585,
+        "mean_candidate": 0.715,
+        "delta": 0.13,
+        "p_value": 0.000999,
+        "significant": true
+      }
+    },
+    "xstest_unsafe_ASR": {
+      "sft": {
+        "n": 200,
+        "mean_baseline": 0.01,
+        "mean_candidate": 0.1,
+        "delta": 0.09,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "resta": {
+        "n": 200,
+        "mean_baseline": 0.01,
+        "mean_candidate": 0.035,
+        "delta": 0.025,
+        "p_value": 0.111888,
+        "significant": false
+      },
+      "resta_a0.1": {
+        "n": 200,
+        "mean_baseline": 0.01,
+        "mean_candidate": 0.055,
+        "delta": 0.045,
+        "p_value": 0.007992,
+        "significant": true
+      },
+      "safemix": {
+        "n": 200,
+        "mean_baseline": 0.01,
+        "mean_candidate": 0.0,
+        "delta": -0.01,
+        "p_value": 0.255744,
+        "significant": false
+      }
+    },
+    "xstest_over_refusal": {
+      "sft": {
+        "n": 250,
+        "mean_baseline": 0.068,
+        "mean_candidate": 0.06,
+        "delta": -0.008,
+        "p_value": 0.753247,
+        "significant": false
+      },
+      "resta": {
+        "n": 250,
+        "mean_baseline": 0.068,
+        "mean_candidate": 0.176,
+        "delta": 0.108,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "resta_a0.1": {
+        "n": 250,
+        "mean_baseline": 0.068,
+        "mean_candidate": 0.06,
+        "delta": -0.008,
+        "p_value": 0.736264,
+        "significant": false
+      },
+      "safemix": {
+        "n": 250,
+        "mean_baseline": 0.068,
+        "mean_candidate": 0.096,
+        "delta": 0.028,
+        "p_value": 0.176823,
+        "significant": false
+      }
+    },
+    "harmful_ASR_llamaguard": {
+      "sft": {
+        "n": 400,
+        "mean_baseline": 0.1475,
+        "mean_candidate": 0.1275,
+        "delta": -0.02,
+        "p_value": 0.342657,
+        "significant": false
+      },
+      "resta": {
+        "n": 400,
+        "mean_baseline": 0.1475,
+        "mean_candidate": 0.1225,
+        "delta": -0.025,
+        "p_value": 0.288711,
+        "significant": false
+      },
+      "resta_a0.1": {
+        "n": 400,
+        "mean_baseline": 0.1475,
+        "mean_candidate": 0.125,
+        "delta": -0.0225,
+        "p_value": 0.317682,
+        "significant": false
+      },
+      "safemix": {
+        "n": 400,
+        "mean_baseline": 0.1475,
+        "mean_candidate": 0.045,
+        "delta": -0.1025,
+        "p_value": 0.000999,
+        "significant": true
+      }
+    },
+    "xstest_unsafe_ASR_llamaguard": {
+      "sft": {
+        "n": 200,
+        "mean_baseline": 0.055,
+        "mean_candidate": 0.095,
+        "delta": 0.04,
+        "p_value": 0.110889,
+        "significant": false
+      },
+      "resta": {
+        "n": 200,
+        "mean_baseline": 0.055,
+        "mean_candidate": 0.035,
+        "delta": -0.02,
+        "p_value": 0.387612,
+        "significant": false
+      },
+      "resta_a0.1": {
+        "n": 200,
+        "mean_baseline": 0.055,
+        "mean_candidate": 0.04,
+        "delta": -0.015,
+        "p_value": 0.491508,
+        "significant": false
+      },
+      "safemix": {
+        "n": 200,
+        "mean_baseline": 0.055,
+        "mean_candidate": 0.03,
+        "delta": -0.025,
+        "p_value": 0.176823,
+        "significant": false
+      }
+    },
+    "benign_med_over_refusal": {
+      "sft": {
+        "n": 500,
+        "mean_baseline": 0.008,
+        "mean_candidate": 0.032,
+        "delta": 0.024,
+        "p_value": 0.003996,
+        "significant": true
+      },
+      "resta": {
+        "n": 500,
+        "mean_baseline": 0.008,
+        "mean_candidate": 0.062,
+        "delta": 0.054,
+        "p_value": 0.000999,
+        "significant": true
+      },
+      "resta_a0.1": {
+        "n": 500,
+        "mean_baseline": 0.008,
+        "mean_candidate": 0.028,
+        "delta": 0.02,
+        "p_value": 0.012987,
+        "significant": true
+      },
+      "safemix": {
+        "n": 500,
+        "mean_baseline": 0.008,
+        "mean_candidate": 0.036,
+        "delta": 0.028,
+        "p_value": 0.001998,
+        "significant": true
+      }
+    }
+  }
+}
