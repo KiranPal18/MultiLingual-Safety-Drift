@@ -33,17 +33,19 @@ def table(model):
 
 
 COMMON_FOOT = f"""
-## Evaluation
-All models evaluated identically: 4-bit NF4 (bf16 compute), greedy decoding, Tiny Aya chat template, stopping on
-`<EOS_TOKEN>`, `<|END_RESPONSE|>` and `<|END_OF_TURN_TOKEN|>` (fine-tuned Tiny Aya models never emit `<EOS_TOKEN>`;
-without these stop tokens they loop). Languages: en, hi, es, fr, ar. Judge: Qwen3Guard-Gen-4B, checked against
-Llama-Guard-3-1B and 96 human labels. Prompts, generations and judge labels: [{EVAL_DS}](https://huggingface.co/datasets/{EVAL_DS}).
+## How it was evaluated
+Every model was evaluated the same way: loaded in 4-bit NF4, greedy decoding, Tiny Aya's own chat template, in
+English, Hindi, Spanish, French and Arabic. Generation stops on `<EOS_TOKEN>`, `<|END_RESPONSE|>` and
+`<|END_OF_TURN_TOKEN|>`. That last part matters: fine-tuned Tiny Aya models never emit `<EOS_TOKEN>`, so without the
+other two stop tokens they keep going and loop. Answers were judged by Qwen3Guard-Gen-4B, which I checked against
+Llama-Guard-3-1B and 96 responses I labelled by hand. All prompts, generations and labels are in
+[{EVAL_DS}](https://huggingface.co/datasets/{EVAL_DS}).
 
-## Intended use and limitations
-Research artifact for studying how domain fine-tuning changes multilingual safety behaviour.
-**Not a medical device and not fit for giving medical advice.** Single seed, 80 red-team prompts per language;
-absolute ASRs are lower bounds (judges miss some unsafe outputs). Licence: CC-BY-NC-4.0, inherited from Tiny Aya.
-Project write-up and code: {a.github}
+## What it's for, and what it isn't
+This is a research artifact for studying how a domain fine-tune changes safety behaviour across languages.
+**Please don't use it for medical advice.** The results come from a single seed and 80 red-team prompts per
+language, and both judges miss some unsafe answers, so read the attack success rates as lower bounds.
+Licence: CC-BY-NC-4.0, inherited from Tiny Aya. Full write-up and code: {a.github}
 """
 
 
@@ -62,9 +64,9 @@ datasets: [{SFT_DS}]
 
 {summary}
 
-QLoRA adapter for [CohereLabs/tiny-aya-global](https://huggingface.co/CohereLabs/tiny-aya-global), trained with
-**AlignTune** (TRL backend). Part of the project *"Fine-tuning breaks safety, in every language"*
-(Lexsi AI Safety & Alignment Hackathon).
+This is a QLoRA adapter for [CohereLabs/tiny-aya-global](https://huggingface.co/CohereLabs/tiny-aya-global), trained
+with AlignTune. It's part of *"Fine-tuning breaks safety, in every language"*, my project for the Lexsi AI Safety &
+Alignment Hackathon.
 
 ## Results
 
@@ -74,7 +76,8 @@ QLoRA adapter for [CohereLabs/tiny-aya-global](https://huggingface.co/CohereLabs
 - Data: {data_line}
 - QLoRA NF4 + double quant, bf16 compute; LoRA r=16, alpha=32, dropout 0.05 on q/k/v/o/gate/up/down projections
 - lr 2e-4, 1 epoch, effective batch 16, max length 640, paged AdamW 8-bit, gradient checkpointing, seed 42
-- Tied 262k-token embedding kept in bf16 (PEFT would up-cast it to fp32 and OOM on 8 GB)
+- The tied 262k-token embedding is kept in bf16. PEFT would otherwise up-cast it to fp32, which runs out of memory on 8 GB.
+- Trained on a laptop RTX 4060 (8 GB)
 
 ## Usage
 ```python
@@ -96,16 +99,21 @@ print(tok.decode(out[0, ids["input_ids"].shape[1]:], skip_special_tokens=True))
 cards = {
     M / "aya-med-sft/final": adapter_card(
         "tiny-aya-global-med-sft", "sft", "Tiny Aya Global — medical SFT (safety-degraded, for research)",
-        "> ⚠️ **This model is published as evidence of safety drift.** Plain medical fine-tuning nearly doubled its "
-        "harmful-prompt attack success rate (10.5% → 18.5%) and lowered refusals in all five languages. "
-        f"Use [{U}/tiny-aya-global-med-safemix](https://huggingface.co/{U}/tiny-aya-global-med-safemix) instead.",
+        "> ⚠️ **I'm publishing this model as evidence, not for use.** It was fine-tuned only on harmless medical Q&A, and "
+        "that alone nearly doubled its attack success rate on red-team prompts (10.5% → 18.5%). It also refuses less "
+        "in all five languages. If you want the medical model, use "
+        f"[{U}/tiny-aya-global-med-safemix](https://huggingface.co/{U}/tiny-aya-global-med-safemix) instead, which "
+        "fixes this.",
         "4,497 multilingual medical Q&A pairs from ApolloCorpus, curated with CuratorKIT (`med_sft` config)"),
     M / "aya-med-sft-safemix/final": adapter_card(
         "tiny-aya-global-med-safemix", "safemix", "Tiny Aya Global — safety-mixed medical SFT (recommended)",
-        "Same recipe as the plain medical SFT, with 309 multilingual refusals (6% of the data) mixed in. "
-        "Harmful-prompt ASR 4.0% — lower than the original Tiny Aya Global (10.5%) — while keeping medical accuracy.",
-        "4,497 medical Q&A + 309 refusals written by Tiny Aya Global on held-out aya_redteaming prompts, kept only "
-        "if Qwen3Guard judged them Safe + Refusal; curated with CuratorKIT (`safety_mix` config)"),
+        "Plain medical fine-tuning made Tiny Aya less safe in every language I tested. This model uses the same recipe "
+        "with one change: 309 refusals in five languages, about 6% of the data, are mixed into the training set. The "
+        "original model wrote those refusals itself. The result is an attack success rate of 4.0%, lower than the "
+        "Tiny Aya Global I started from (10.5%), with medical accuracy unchanged.",
+        "4,497 medical Q&A pairs plus 309 refusals. Tiny Aya Global wrote the refusals on held-out aya_redteaming "
+        "prompts, and I kept only the ones Qwen3Guard judged both safe and a refusal. Curated with CuratorKIT "
+        "(`safety_mix` config)."),
 }
 cards[M / "aya-med-resta"] = f"""---
 base_model: CohereLabs/tiny-aya-global
@@ -117,20 +125,22 @@ tags: [resta, safetune, model-merging, medical, multilingual, ai-safety, lexsi-h
 
 # Tiny Aya Global — medical SFT + RESTA (α = 0.25)
 
-The [medical SFT adapter](https://huggingface.co/{U}/tiny-aya-global-med-sft) merged into Tiny Aya Global, then
-re-aligned in weight space with **SafeTune RESTA**: θ = θ_sft + 0.25 · (θ_tiny-aya-global − θ_tiny-aya-base).
-Full bf16 weights.
+This model starts from the [medical SFT adapter](https://huggingface.co/{U}/tiny-aya-global-med-sft), merged into
+Tiny Aya Global. I then tried to repair its safety in weight space with SafeTune's RESTA, adding back part of the
+difference between the aligned and the base model: θ = θ_sft + 0.25 · (θ_tiny-aya-global − θ_tiny-aya-base).
+These are full bf16 weights.
 
-> Negative result, published for completeness: RESTA partially restores safety but costs ~8 accuracy points and
-> triples XSTest over-refusal; its repair is uneven across languages (worse than the SFT in French). The
-> [safety-mixed SFT](https://huggingface.co/{U}/tiny-aya-global-med-safemix) dominates it.
+> This one is a negative result, and I'm publishing it for completeness. RESTA brings back some safety, but it
+> costs about 8 accuracy points and the model refuses three times as many safe XSTest prompts. The repair is also
+> uneven: in French it ends up less safe than the plain fine-tune. The
+> [safety-mixed model](https://huggingface.co/{U}/tiny-aya-global-med-safemix) does better on every count.
 
 ## Results
 
 {table("resta")}
 
 At α = 0.1 (not uploaded): medical/general accuracy {pct("med_acc", "resta_a0.1")}/{pct("general_acc", "resta_a0.1")},
-harmful ASR {pct("harmful_ASR", "resta_a0.1")} — accuracy kept, almost no safety repair.
+harmful ASR {pct("harmful_ASR", "resta_a0.1")}. Accuracy survives, but safety barely improves.
 
 ## Usage
 ```python
@@ -185,8 +195,9 @@ configs:
 
 # Multilingual medical SFT data + safety mix (Tiny Aya)
 
-Training data for [{U}/tiny-aya-global-med-sft](https://huggingface.co/{U}/tiny-aya-global-med-sft) and
-[{U}/tiny-aya-global-med-safemix](https://huggingface.co/{U}/tiny-aya-global-med-safemix). Chat `messages` format.
+This is the training data behind [{U}/tiny-aya-global-med-sft](https://huggingface.co/{U}/tiny-aya-global-med-sft)
+and [{U}/tiny-aya-global-med-safemix](https://huggingface.co/{U}/tiny-aya-global-med-safemix), in chat `messages`
+format.
 
 | Config | Rows | Content |
 |---|---|---|
@@ -201,12 +212,13 @@ Training data for [{U}/tiny-aya-global-med-sft](https://huggingface.co/{U}/tiny-
 - CuratorKIT: schema gate, exact + MinHash dedup (threshold 0.85), text cleaning, 3–1024 token filter,
   95/5 split. 4759 → 4734 rows. CuratorKIT manifests, checksums and provenance are in each folder.
 - **Refusals:** 500 held-out [CohereLabs/aya_redteaming](https://huggingface.co/datasets/CohereLabs/aya_redteaming)
-  prompts (100 per language, disjoint from the evaluation prompts) answered by Tiny Aya Global; kept only replies
-  Qwen3Guard-Gen-4B judged *Safe* and *Refusal* → {n['ref']}. No harmful text was written by the authors.
+  prompts (100 per language, none of them used in evaluation), answered by Tiny Aya Global itself. I kept only the
+  replies Qwen3Guard-Gen-4B judged both *Safe* and a *Refusal*, which left {n['ref']}. I didn't write any harmful text
+  myself.
 
 ## Notes
-- `refusals_only` contains red-team prompts (from aya_redteaming) paired with refusals; the responses do not
-  contain harmful instructions, but the prompts are offensive by design.
+- `refusals_only` pairs red-team prompts from aya_redteaming with refusals. The responses don't contain harmful
+  instructions, but the prompts are offensive on purpose.
 - Language labels were not preserved through curation.
 - Licence: CC-BY-NC-4.0 (contains Tiny Aya outputs); sources: ApolloCorpus and aya_redteaming (Apache-2.0).
 """, encoding="utf-8")
@@ -251,11 +263,14 @@ configs:
 
 # Multilingual medical safety-drift evaluations (Tiny Aya)
 
-> ⚠️ Contains red-team prompts and some **unsafe model outputs** (that is what is being measured).
-> For safety research only.
+> ⚠️ This contains red-team prompts and some **unsafe model outputs**, since that's what is being measured.
+> Please use it for safety research only.
 
-Everything needed to audit the results of *"Fine-tuning breaks safety, in every language"*: evaluation prompts,
-every model's generations with judge labels, the blind human labels and the agreement analysis.
+This is everything you need to check the results of *"Fine-tuning breaks safety, in every language"*:
+- the evaluation prompts
+- every model's answers, with the judge labels
+- my blind hand labels
+- the judge-agreement analysis
 
 | Folder | Content |
 |---|---|
@@ -267,7 +282,7 @@ every model's generations with judge labels, the blind human labels and the agre
 Models: `base` = CohereLabs/tiny-aya-global, `sft` = [{U}/tiny-aya-global-med-sft](https://huggingface.co/{U}/tiny-aya-global-med-sft),
 `safemix` = [{U}/tiny-aya-global-med-safemix](https://huggingface.co/{U}/tiny-aya-global-med-safemix),
 `resta` = [{U}/tiny-aya-global-med-resta](https://huggingface.co/{U}/tiny-aya-global-med-resta) (α=0.25), `resta_a0.1` = RESTA α=0.1.
-All generated in 4-bit NF4, greedy, ≤256 new tokens.
+Every answer was generated in 4-bit NF4 with greedy decoding and at most 256 new tokens.
 
 Sources: Global-MMLU, aya_redteaming (Apache-2.0), XSTest (CC-BY-4.0). Model outputs: CC-BY-NC-4.0 (Tiny Aya).
 """, encoding="utf-8")
