@@ -13,3 +13,4 @@ artifacts/logs/eval/
 artifacts/logs/eval_v1_no_stop_token/*/
 artifacts/logs/judge_check/*.csv
 *.log
+deep-research/
