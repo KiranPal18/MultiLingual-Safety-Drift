@@ -49,7 +49,7 @@ Licence: CC-BY-NC-4.0, inherited from Tiny Aya. Full write-up and code: {a.githu
 """
 
 
-def adapter_card(name, model_key, title, summary, data_line):
+def adapter_card(name, model_key, title, summary, data_line, hw):
     return f"""---
 base_model: CohereLabs/tiny-aya-global
 library_name: peft
@@ -77,7 +77,7 @@ Alignment Hackathon.
 - QLoRA NF4 + double quant, bf16 compute; LoRA r=16, alpha=32, dropout 0.05 on q/k/v/o/gate/up/down projections
 - lr 2e-4, 1 epoch, effective batch 16, max length 640, paged AdamW 8-bit, gradient checkpointing, seed 42
 - The tied 262k-token embedding is kept in bf16. PEFT would otherwise up-cast it to fp32, which runs out of memory on 8 GB.
-- Trained on a laptop RTX 4060 (8 GB)
+- Trained on {hw}
 
 ## Usage
 ```python
@@ -104,7 +104,8 @@ cards = {
         "in all five languages. If you want the medical model, use "
         f"[{U}/tiny-aya-global-med-safemix](https://huggingface.co/{U}/tiny-aya-global-med-safemix) instead, which "
         "fixes this.",
-        "4,497 multilingual medical Q&A pairs from ApolloCorpus, curated with CuratorKIT (`med_sft` config)"),
+        "4,497 multilingual medical Q&A pairs from ApolloCorpus, curated with CuratorKIT (`med_sft` config)",
+        "a laptop RTX 4060 (8 GB), in 51 minutes"),
     M / "aya-med-sft-safemix/final": adapter_card(
         "tiny-aya-global-med-safemix", "safemix", "Tiny Aya Global — safety-mixed medical SFT (recommended)",
         "Plain medical fine-tuning made Tiny Aya less safe in every language I tested. This model uses the same recipe "
@@ -113,7 +114,8 @@ cards = {
         "Tiny Aya Global I started from (10.5%), with medical accuracy unchanged.",
         "4,497 medical Q&A pairs plus 309 refusals. Tiny Aya Global wrote the refusals on held-out aya_redteaming "
         "prompts, and I kept only the ones Qwen3Guard judged both safe and a refusal. Curated with CuratorKIT "
-        "(`safety_mix` config)."),
+        "(`safety_mix` config).",
+        "an A40 (48 GB) using free RunPod credits; the same recipe fits in 8 GB"),
 }
 cards[M / "aya-med-resta"] = f"""---
 base_model: CohereLabs/tiny-aya-global
@@ -237,7 +239,7 @@ for m in MODELS + ["aligned_safety_pool"]:
         shutil.copy(f, ev / f"generations/{m}/{f.name}")
 shutil.copytree(L / "judge_check", ev / "judge_check")
 (ev / "judge_check/human_labels.csv").unlink(missing_ok=True)  # unlabelled template; the labelled file is kept
-for f in ["results.md", "results.json"]:
+for f in ["results.md", "results.json", "leak_check.md"]:
     shutil.copy(L / f, ev / f)
 gen_cfg = "\n".join(f"""- config_name: {m.replace('.', '')}_{s}
   data_files: generations/{m}/{s}.jsonl""" for m in MODELS for s in ["harmful", "xstest", "benign_medical"])
@@ -278,6 +280,7 @@ This is everything you need to check the results of *"Fine-tuning breaks safety,
 | `generations/<model>/` | responses (`response`), MCQ predictions (`pred`, `correct`), Qwen3Guard labels (`guard_safety`, `guard_refusal`, `guard_categories`, `guard_raw`) and Llama-Guard-3-1B labels (`lg_safety`) |
 | `judge_check/` | `human_labels_final.csv` (96 blind human labels, en+hi), `agreement.md/json` |
 | `results.md/json` | all metrics, per-language slices, paired-bootstrap p-values (AuditKIT) |
+| `leak_check.md` | train/test overlap check: exact matches and shared 8-grams |
 
 Models: `base` = CohereLabs/tiny-aya-global, `sft` = [{U}/tiny-aya-global-med-sft](https://huggingface.co/{U}/tiny-aya-global-med-sft),
 `safemix` = [{U}/tiny-aya-global-med-safemix](https://huggingface.co/{U}/tiny-aya-global-med-safemix),

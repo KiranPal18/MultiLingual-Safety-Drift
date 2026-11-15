@@ -18,7 +18,7 @@ So for the Lexsi AI Safety & Alignment Hackathon I built a medical assistant in 
 
 ## The setup
 
-I kept it small enough to run on my laptop's RTX 4060 (8 GB).
+I kept it small enough to run on my laptop's RTX 4060 (8 GB). For the later runs I used about 6 hours of free RunPod credits on an A40, just to finish before the deadline.
 
 I took 4.5k medical Q&A pairs from ApolloCorpus across the five languages and cleaned them with CuratorKIT. Then I fine-tuned with QLoRA through AlignTune: one epoch, LoRA rank 16, 51 minutes.
 
