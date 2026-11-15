@@ -385,8 +385,7 @@ kept in `artifacts/logs/eval_v1_no_stop_token/` for comparison.
 | My laptop | RTX 4060, 8 GB | data, plain SFT (51 min), first evaluation, stop-token reruns, judging, Llama Guard, report | not tracked exactly | none |
 | Vast.ai | A40, 48 GB | safety-pool generation, safety-mixed SFT, RESTA (both α), evaluating those models | ~6 h | none (free credits) |
 
-The whole pipeline fits in 8 GB of VRAM (4-bit QLoRA training, 4-bit evaluation). I used about 6 hours of free RunPod
-credits on an A40 to finish the later runs before the deadline, so the project cost nothing.
+The whole pipeline fits in 8 GB of VRAM (4-bit QLoRA training, 4-bit evaluation). I used about 6 hours of free vast.ai credits on an A40 to finish the later runs before the deadline, so the project cost nothing.
 
 **The repair is cheap.** The safety mix costs one extra training run plus 500 generated answers. It needs no new
 human data and no extra model, and it cuts harmful ASR by 78% compared with the plain fine-tune.
