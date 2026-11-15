@@ -4,7 +4,7 @@
 in all five languages I tested. Mixing 309 refusals written by the original model into the same fine-tune brings it
 below where it started.
 
-> ⚠️ **Content warning.** This project measures how models respond to harmful requests. The write-up quotes no
+> **Content warning.** This project measures how models respond to harmful requests. The write-up quotes no
 > harmful prompts or outputs apart from one mild privacy example (section 6). The linked evaluation dataset contains
 > red-team prompts (hate speech, violence, self-harm and similar) and some unsafe model outputs.
 
@@ -383,7 +383,7 @@ kept in `artifacts/logs/eval_v1_no_stop_token/` for comparison.
 | Where | GPU | What ran there | GPU time | Cost to me |
 |---|---|---|---|---|
 | My laptop | RTX 4060, 8 GB | data, plain SFT (51 min), first evaluation, stop-token reruns, judging, Llama Guard, report | not tracked exactly | none |
-| RunPod | A40, 48 GB | safety-pool generation, safety-mixed SFT, RESTA (both α), evaluating those models | ~6 h | none (free RunPod credits) |
+| Vast.ai | A40, 48 GB | safety-pool generation, safety-mixed SFT, RESTA (both α), evaluating those models | ~6 h | none (free credits) |
 
 The whole pipeline fits in 8 GB of VRAM (4-bit QLoRA training, 4-bit evaluation). I used about 6 hours of free RunPod
 credits on an A40 to finish the later runs before the deadline, so the project cost nothing.
@@ -508,13 +508,6 @@ bash scripts/resta_a01.sh                                 # optional RESTA α=0.
 - Yong et al. (2023). *Low-Resource Languages Jailbreak GPT-4.* arXiv:2310.02446
 - Lexsi Labs kits: [CuratorKIT](https://github.com/Lexsi-Labs/CuratorKIT), [AlignTune](https://github.com/Lexsi-Labs/aligntune), [SafeTune](https://github.com/Lexsi-Labs/SafeTune), [AuditKIT](https://github.com/Lexsi-Labs/AuditKIT)
 
-## Changelog
-
-- **v1 (submitted):** code, models, datasets, results, judge check, README.
-- **v2 (before the deadline):** added the sections the write-up checklist asks for: claim, content warning, judges'
-  summary, tracks, research questions, related work, model roles, CuratorKIT counts, attack-set breakdown, leak
-  check, metric rationale, sample outputs, compute, ethics, "with more credits", declarations and references. No
-  results changed.
 
 ## Licences
 
